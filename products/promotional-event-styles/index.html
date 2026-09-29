@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bag Styles | Guangxi Jinyu Intelligent Manufacturing Technology Co., Ltd.</title>
-    <meta name="description" content="Custom bag styles from Guangxi Jinyu Intelligent Manufacturing Technology Co., Ltd.">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: Arial, sans-serif; }
         body { color: #333; line-height: 1.6; }
@@ -22,13 +21,6 @@
         .product-info p { color: #666; margin-bottom: 0.5rem; font-size: 14px; }
         .whatsapp-float { position: fixed; bottom: 24px; right: 24px; background: #25D366; color: #fff; padding: 14px 20px; border-radius: 50px; text-decoration: none; font-weight: bold; box-shadow: 0 2px 10px rgba(0,0,0,0.2); z-index: 998; }
         footer { background: #1A365D; color: #fff; text-align: center; padding: 2rem; margin-top: 4rem; }
-        #cookieBanner { position: fixed; bottom: 0; left: 0; right: 0; background: #1A365D; color: #fff; padding: 18px 24px; z-index: 9999; display: none; box-sizing: border-box; }
-        .cookie-wrap { max-width: 1200px; margin: 0 auto; display: flex; flex-wrap: wrap; gap: 16px; align-items: center; }
-        .cookie-text { flex: 1; min-width: 300px; font-size: 14px; line-height: 1.6; }
-        .cookie-text a { color: #ff8a33; text-decoration: none; }
-        .cookie-buttons { display: flex; gap: 12px; }
-        .btn-accept { background: #ff8a33; color: white; border: none; padding: 10px 22px; border-radius: 4px; cursor: pointer; font-weight: 600; }
-        .btn-decline { background: transparent; color: white; border: 1px solid #fff; padding: 10px 22px; border-radius: 4px; cursor: pointer; }
     </style>
 </head>
 <body>
@@ -52,52 +44,7 @@
     <footer>
         <p>© 2026 Guangxi Jinyu Intelligent Manufacturing Technology Co., Ltd. All rights reserved.</p>
     </footer>
-    <div id="cookieBanner">
-        <div class="cookie-wrap">
-            <div class="cookie-text">
-                We use cookies to analyze website traffic and optimize your advertising experience. By accepting, you agree to our <a href="/privacy.html">Privacy Policy</a>.
-            </div>
-            <div class="cookie-buttons">
-                <button class="btn-accept" id="acceptCookie">Accept</button>
-                <button class="btn-decline" id="declineCookie">Decline</button>
-            </div>
-        </div>
-    </div>
 <script>
-const cookieKey = "site_cookie_consent";
-const consent = localStorage.getItem(cookieKey);
-const banner = document.getElementById("cookieBanner");
-const GA_ID = "G-DNVX20RTKE";
-const META_PIXEL_ID = "YOUR_META_PIXEL_ID";
-const PIN_TAG_ID = "YOUR_PINTEREST_TAG_ID";
-const euCountries = ['AT','BE','BG','HR','CY','CZ','DK','EE','FI','FR','DE','GR','HU','IE','IT','LV','LT','LU','MT','NL','PL','PT','RO','SK','SI','ES','SE','GB'];
-
-function loadAllTracking(){
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('consent', 'update', { ad_storage: 'granted', analytics_storage: 'granted' });
-    const gaScript = document.createElement('script');
-    gaScript.async = true;
-    gaScript.src = `https://www.googletagmanager.com/gtag/js?id=${GA_ID}`;
-    document.head.appendChild(gaScript);
-    gtag('js', new Date());
-    gtag('config', GA_ID);
-    if(META_PIXEL_ID !== "YOUR_META_PIXEL_ID"){
-        !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window, document,'script','https://connect.facebook.net/en_US/fbevents.js');
-        fbq('consent','grant'); fbq('init', META_PIXEL_ID); fbq('track', 'PageView');
-    }
-    if(PIN_TAG_ID !== "YOUR_PINTEREST_TAG_ID"){
-        !function(e,t){if(!window.pintrk){window.pintrk=function(){window.pintrk.queue.push(Array.prototype.slice.call(arguments))};var n=window.pintrk;n.queue=[],n.version="3.0";var r=t.createElement("script");r.async=!0,r.src="https://s.pinimg.com/ct/core.js";var i=t.getElementsByTagName("script")[0];i.parentNode.insertBefore(r,i)}}(window,document);
-        pintrk('load',PIN_TAG_ID); pintrk('page');
-    }
-}
-function setDenyConsent(){
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('consent', 'default', { ad_storage: 'denied', analytics_storage: 'denied' });
-}
-
-// 读取CMS产品
 fetch('/content/products/')
   .then(r => r.text())
   .then(html => {
@@ -108,13 +55,12 @@ fetch('/content/products/')
       .filter(h => h.endsWith('.json'));
     Promise.all(links.map(l => fetch(l).then(r => r.json())))
       .then(products => {
-        const bags = products.filter(p => promotional === 'promotional');
         const grid = document.getElementById('productGrid');
-        if (bags.length === 0) {
+        if (products.length === 0) {
           grid.innerHTML = '<p>No products found.</p>';
           return;
         }
-        grid.innerHTML = bags.map(p => `
+        grid.innerHTML = products.map(p => `
           <div class="product-card">
             ${p.main_image ? `<img src="${p.main_image}" alt="${p.title}">` : ''}
             <div class="product-info">
@@ -127,30 +73,6 @@ fetch('/content/products/')
         `).join('');
       });
   });
-
-fetch('https://ipapi.co/json/')
-.then(res=>res.json())
-.then(data=>{
-    const isEu = euCountries.includes(data.country_code);
-    if(!isEu){ loadAllTracking(); }
-    else{
-        if(consent === "accept"){ loadAllTracking(); }
-        else if(consent === "decline"){ setDenyConsent(); }
-        else{ banner.style.display = "block"; setDenyConsent(); }
-    }
-})
-.catch(err=>{ if(!consent || consent === "accept") loadAllTracking(); else setDenyConsent(); })
-
-document.getElementById("acceptCookie").addEventListener("click",()=>{
-    localStorage.setItem(cookieKey,"accept");
-    banner.style.display="none";
-    loadAllTracking();
-})
-document.getElementById("declineCookie").addEventListener("click",()=>{
-    localStorage.setItem(cookieKey,"decline");
-    banner.style.display="none";
-    setDenyConsent();
-})
 </script>
 </body>
 </html>
