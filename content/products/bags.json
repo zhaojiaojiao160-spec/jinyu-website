@@ -1,0 +1,19 @@
+﻿{
+  "items": [
+    {
+      "name": "Canvas Tote Bag",
+      "desc": "Heavy canvas tote bag for daily shopping, custom logo, multiple color options.",
+      "moq": "300 pcs"
+    },
+    {
+      "name": "Polyester Drawstring Backpack",
+      "desc": "Lightweight drawstring sport bag, widely used for gym, travel and wholesale.",
+      "moq": "500 pcs"
+    },
+    {
+      "name": "Cosmetic Makeup Pouch",
+      "desc": "Small textile cosmetic bag, zipper closure, custom print for brand retail.",
+      "moq": "500 pcs"
+    }
+  ]
+}

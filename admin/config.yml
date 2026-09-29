@@ -1,0 +1,32 @@
+﻿backend:
+  name: git-gateway
+  branch: main
+
+media_folder: "assets/images/uploads"
+public_folder: "/assets/images/uploads"
+
+site_url: "https://www.jinyusmarttextile.com"
+display_url: "https://www.jinyusmarttextile.com"
+
+collections:
+  - name: "products"
+    label: "Products"
+    folder: "content/products"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - {label: "Product Title", name: "title", widget: "string"}
+      - {label: "Description", name: "description", widget: "text"}
+      - {label: "MOQ", name: "moq", widget: "string"}
+      - {label: "Material", name: "material", widget: "string"}
+      - {label: "Product Image", name: "image", widget: "image"}
+
+  - name: "site_settings"
+    label: "Global Site Settings"
+    files:
+      - label: "Contact Info"
+        name: "contact"
+        file: "content/settings/contact.json"
+        fields:
+          - {label: "Company Name", name: "company", widget: "string", default: "Guangxi Jinyu Intelligent Manufacturing Technology Co., Ltd."}
+          - {label: "WhatsApp Number", name: "wa", widget: "string", default: "+8618174810606"}

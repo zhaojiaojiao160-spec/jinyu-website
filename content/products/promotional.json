@@ -1,0 +1,19 @@
+﻿{
+  "items": [
+    {
+      "name": "Custom Printed Foldable Tote",
+      "desc": "Lightweight foldable shopping tote for exhibition & promotional giveaway, custom logo printing available.",
+      "moq": "500 pcs"
+    },
+    {
+      "name": "Branded Drawstring Gift Pouch",
+      "desc": "Small drawstring pouch for event souvenir, made of polyester fabric, support heat transfer print.",
+      "moq": "300 pcs"
+    },
+    {
+      "name": "Event Waterproof Storage Sack",
+      "desc": "Waterproof promotional sack for outdoor activity, durable fabric, custom size acceptable.",
+      "moq": "1000 pcs"
+    }
+  ]
+}
