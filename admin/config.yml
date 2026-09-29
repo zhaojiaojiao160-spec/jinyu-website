@@ -11,19 +11,21 @@ display_url: "https://www.jinyusmarttextile.com"
 collections:
   - name: "products"
     label: "Products"
-    folder: "content/products"
-    create: true
-    extension: "json"
-    format: "json"
-    slug: "{{slug}}"
-    fields:
-      - {label: "Product Title", name: "title", widget: "string"}
-      - {label: "Category", name: "category", widget: "select", options: ["bags", "promotional"]}
-      - {label: "Description", name: "description", widget: "text"}
-      - {label: "MOQ", name: "moq", widget: "string"}
-      - {label: "Material", name: "material", widget: "string"}
-      - {label: "Size", name: "size", widget: "string", required: false}
-      - {label: "Product Image", name: "main_image", widget: "image"}
+    files:
+      - label: "Product List"
+        name: "products"
+        file: "content/products/index.json"
+        fields:
+          - name: "products"
+            label: "Products"
+            label_singular: "Product"
+            widget: "list"
+            fields:
+              - {label: "Product Title", name: "title", widget: "string"}
+              - {label: "Description", name: "description", widget: "text"}
+              - {label: "MOQ", name: "moq", widget: "string"}
+              - {label: "Material", name: "material", widget: "string"}
+              - {label: "Product Image", name: "image", widget: "image"}
 
   - name: "site_settings"
     label: "Global Site Settings"
