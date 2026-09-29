@@ -108,7 +108,7 @@ fetch('/content/products/')
       .filter(h => h.endsWith('.json'));
     Promise.all(links.map(l => fetch(l).then(r => r.json())))
       .then(products => {
-        const bags = products.filter(p => p.category === 'bags');
+        const bags = products.filter(p => promotional === 'promotional');
         const grid = document.getElementById('productGrid');
         if (bags.length === 0) {
           grid.innerHTML = '<p>No products found.</p>';
